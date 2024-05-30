@@ -9,6 +9,8 @@ import org.hibernate.annotations.Comment;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -16,6 +18,10 @@ public class Member {
     @Id @GeneratedValue
     @Column(name = "member_idx", nullable = false, unique = true)
     private Long idx;
+
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "member_setting_idx")
+    private MemberSetting memberSetting;
 
     @Column
     private String name;
