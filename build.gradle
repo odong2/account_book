@@ -52,6 +52,9 @@ dependencies {
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 	// excel 다운로드
 	implementation group: 'org.apache.poi', name: 'poi', version: '5.0.0'
+	// modelMapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
+
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 //	runtimeOnly 'com.mysql:mysql-connector-j'
