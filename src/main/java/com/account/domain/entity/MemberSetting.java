@@ -7,19 +7,20 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class MemberSetting extends BaseEntity{
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "member_setting_idx")
-    private Long idx;
+    private long idx;
 
-    @Enumerated(EnumType.STRING)
-    private NoticeType type;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "member_idx")
+    private Member member;
 
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'KO'")
@@ -30,5 +31,4 @@ public class MemberSetting extends BaseEntity{
     @ColumnDefault("'LIGHT'")
     @Comment("다크모드 설정")
     private LightType lightType;
-
 }

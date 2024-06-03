@@ -18,13 +18,12 @@ public class Role extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "role_idx")
-    private Long idx;
+    private long idx;
 
     @Column(nullable = false, unique = true) @Comment("권한이름")
     private String name;
 
-    @Column @ColumnDefault("1")
-    @Comment("0 : 미사용, 1 : 사용")
-    private Integer state;
+    @ColumnDefault("1") @Comment("0 : 미사용, 1 : 사용")
+    private int state;
 
 }

@@ -15,10 +15,9 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class PropertyGroup extends BaseEntity{
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "property_group_idx")
-    private Long idx;
+    private long idx;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_idx")
@@ -28,7 +27,6 @@ public class PropertyGroup extends BaseEntity{
     @Comment("자산 이름")
     private String name;
 
-    @Column
     @ColumnDefault("1") @Comment("상태값")
-    private Integer state;
+    private int state;
 }

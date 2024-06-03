@@ -15,33 +15,27 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class AccountBookImg extends BaseEntity{
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "account_book_img_idx")
-    private Long idx;
+    private long idx;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "account_book_idx")
     private AccountBook accountBook;
 
-    @Column(nullable = false)
-    @Comment("이미지 url")
+    @Column(nullable = false) @Comment("이미지 url")
     private String url;
 
-    @Column(nullable = false)
-    @Comment("이미지 이름")
+    @Column(nullable = false) @Comment("이미지 이름")
     private String uploadName;
 
-    @Column(nullable = false)
-    @Comment("업로드 경로")
+    @Column(nullable = false) @Comment("업로드 경로")
     private String uploadPath;
 
-    @Column @ColumnDefault("1")
-    @Comment("정렬")
-    private Integer sort;
+    @ColumnDefault("1") @Comment("정렬")
+    private int sort;
 
-    @Column @ColumnDefault("1")
-    @Comment("0 : 삭제, 1: 사용")
-    private Integer state;
+    @ColumnDefault("1") @Comment("0 : 삭제, 1: 사용")
+    private int state;
 
 }

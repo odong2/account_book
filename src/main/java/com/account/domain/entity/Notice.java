@@ -17,7 +17,7 @@ public class Notice extends BaseEntity {
 
     @Id
     @GeneratedValue @Column(name = "notice_idx")
-    private Long idx;
+    private long idx;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_idx")
@@ -34,11 +34,9 @@ public class Notice extends BaseEntity {
     @Comment("내용")
     private String text;
 
-    @Column @ColumnDefault("1")
-    @Comment("정렬")
-    private Integer sort;
+    @ColumnDefault("1") @Comment("정렬")
+    private int sort;
 
-    @Column
     @ColumnDefault("1") @Comment("상태값")
-    private Integer state;
+    private int state;
 }

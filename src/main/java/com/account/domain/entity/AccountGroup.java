@@ -17,7 +17,7 @@ public class AccountGroup extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "account_group_idx")
-    private Long idx;
+    private long idx;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_idx")
@@ -31,8 +31,7 @@ public class AccountGroup extends BaseEntity{
     @Comment("income, expense, transfer")
     private AccountType type;
 
-    @Column
     @ColumnDefault("1") @Comment("상태값")
-    private Integer state;
+    private int state;
 
 }

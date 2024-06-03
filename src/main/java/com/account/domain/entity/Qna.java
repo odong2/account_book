@@ -18,10 +18,9 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class Qna extends BaseEntity {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "qna_idx")
-    private Long idx;
+    private long idx;
 
     @OneToMany(mappedBy = "qna", cascade = CascadeType.ALL, orphanRemoval = true)
     @Comment("qna 댓글 및 답변")
@@ -39,8 +38,7 @@ public class Qna extends BaseEntity {
     @Comment("내용")
     private String text;
 
-    @Column
     @ColumnDefault("1")
     @Comment("0: 삭제, 1: 미답변, 2: 답변완료")
-    private Integer state;
+    private int state;
 }

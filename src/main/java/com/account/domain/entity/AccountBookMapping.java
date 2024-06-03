@@ -13,9 +13,10 @@ import static javax.persistence.FetchType.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class AccountBookMapping {
+
     @Id @GeneratedValue
     @Column(name = "account_book_mapping_idx")
-    private Long idx;
+    private long idx;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "account_book_idx")

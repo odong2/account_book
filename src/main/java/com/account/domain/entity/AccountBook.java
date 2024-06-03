@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class AccountBook extends BaseEntity{
+public class AccountBook extends BaseEntity {
+
     @Id @GeneratedValue
     @Column(name = "account_book_idx", nullable = false, unique = true)
-    private Long idx;
+    private long idx;
 
     @ManyToOne
     @JoinColumn(name = "member_idx")

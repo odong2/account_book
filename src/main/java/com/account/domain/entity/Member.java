@@ -15,15 +15,16 @@ import static javax.persistence.FetchType.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Member {
+
     @Id @GeneratedValue
     @Column(name = "member_idx", nullable = false, unique = true)
-    private Long idx;
+    private long idx;
 
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "member_setting_idx")
     private MemberSetting memberSetting;
 
-    @Column
+    @Comment("이름")
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -38,23 +39,15 @@ public class Member {
     @Column(nullable = false) @Comment("비밀번호")
     private String password;
 
-    @Column
     @ColumnDefault("0") @Comment("자산")
-    private Integer property;
+    private int property;
 
-    @Column
     @ColumnDefault("0") @Comment("부채")
-    private Integer debt;
+    private int debt;
 
-    @Column()
     @ColumnDefault("1") @Comment("상태값")
-    private Integer state;
+    private int state;
 
-
+    @Comment("최근 로그인 일자")
     private LocalDateTime lastLoginDate;
-
-    //==생성 메서드==//
-    //==비즈니스 로직==//
-    //==연관관계 편의 메서드==//
-
 }

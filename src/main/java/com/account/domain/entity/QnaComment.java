@@ -15,10 +15,9 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class QnaComment extends BaseEntity {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "qna_comment_idx")
-    private Long idx;
+    private long idx;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "qna_idx")
@@ -32,7 +31,6 @@ public class QnaComment extends BaseEntity {
     @Comment("내용")
     private String text;
 
-    @Column
     @ColumnDefault("1") @Comment("0: 삭제, 1: 정상")
-    private Integer state;
+    private int state;
 }
