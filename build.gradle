@@ -27,7 +27,8 @@ ext {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	// 소셜 로그인
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	// spring-jdbc
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	// JPA
@@ -39,21 +40,25 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	// thymeleaf-layout-dialect
 	implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.0.0'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	// validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	// 내장 톰캣
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// queryParam 보는 용도
-	implementation group: 'com.github.gavlyukovskiy', name: 'p6spy-spring-boot-starter', version: '1.9.0'
+//	implementation group: 'com.github.gavlyukovskiy', name: 'p6spy-spring-boot-starter', version: '1.9.0'
 	// json
 	implementation group: 'org.json', name: 'json', version: '20220924'
 	// 쿼리 파라미터 로그
-	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
+//	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 	// excel 다운로드
 	implementation group: 'org.apache.poi', name: 'poi', version: '5.0.0'
 	// modelMapper
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
+    // slack webhook
+	implementation 'net.gpedro.integrations.slack:slack-webhook:1.4.0'
+	// gson
+	implementation 'com.google.code.gson:gson:2.9.0'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
@@ -61,7 +66,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	testImplementation 'org.springframework.security:spring-security-test'
+//	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
