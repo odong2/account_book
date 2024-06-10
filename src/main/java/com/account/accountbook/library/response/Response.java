@@ -1,4 +1,4 @@
-package com.account.accountbook.controller;
+package com.account.accountbook.library.response;
 
 import lombok.Data;
 import org.springframework.http.HttpHeaders;
@@ -25,13 +25,15 @@ public class Response {
         this.data = null;
     }
 
-    public ResponseEntity<Response> setResponse(Response response) {
+    public ResponseEntity<Object> setResponse(Response response) {
 
         // set headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
         // return value
-        return new ResponseEntity<>(response, headers, HttpStatus.OK);
+        return ResponseEntity.status(response.getStatus())
+                .headers(headers)
+                .body(response);
     }
 }

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 /****************************************
- * 에러 코드
+ * 공통 에러 코드
  ****************************************/
 @Getter
 @RequiredArgsConstructor
