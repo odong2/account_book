@@ -62,6 +62,8 @@ dependencies {
 	implementation 'net.gpedro.integrations.slack:slack-webhook:1.4.0'
 	// gson
 	implementation 'com.google.code.gson:gson:2.9.0'
+	// AOP
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

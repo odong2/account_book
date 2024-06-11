@@ -27,6 +27,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.account.accountbook.library.util.response.ResponseUtil.EXCEPTION;
+
 @RestControllerAdvice
 @Slf4j
 public class GlobalException extends ResponseEntityExceptionHandler {
@@ -50,19 +52,19 @@ public class GlobalException extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(errorCode);
     }
 
+    // 런타임 오류
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Object> handleRuntimeException(HttpServletRequest req, RuntimeException e) {
+        sendSlackMessage(req, e);
+        log.warn("handleRuntimeException", e);
+        ErrorCode errorCode = CustomErrorCode.INTERNAL_SERVER_ERROR;
+        return handleExceptionInternal(errorCode);
+    }
+
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<Object> handleCustomException(HttpServletRequest req, CustomException e) {
         sendSlackMessage(req, e);
         log.warn("handleCustomException", e);
-        ErrorCode errorCode = e.getErrorCode();
-        return handleExceptionInternal(errorCode);
-    }
-
-    // 런타임 오류
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Object> handleRuntimeException(HttpServletRequest req, CustomException e) {
-        sendSlackMessage(req, e);
-        log.warn("handleRuntimeException", e);
         ErrorCode errorCode = e.getErrorCode();
         return handleExceptionInternal(errorCode);
     }
@@ -143,6 +145,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 
     private ErrorResponse makeErrorResponse(ErrorCode errorCode) {
         return ErrorResponse.builder()
+                .status(EXCEPTION)
                 .code(errorCode.name())
                 .message(errorCode.getMessage())
                 .build();
@@ -156,6 +159,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 
     private ErrorResponse makeErrorResponse(ErrorCode errorCode, String message) {
         return ErrorResponse.builder()
+                .status(EXCEPTION)
                 .code(errorCode.name())
                 .message(message)
                 .build();
@@ -175,6 +179,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
                 .collect(Collectors.toList());
 
         return ErrorResponse.builder()
+                .status(EXCEPTION)
                 .code(errorCode.name())
                 .message(errorCode.getMessage())
                 .errors(validationErrorList)

@@ -1,4 +1,4 @@
-package com.account.accountbook.library.response;
+package com.account.accountbook.library.util.response;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
  ****************************************/
 @Getter
 @RequiredArgsConstructor
-public enum CustomResponseCode implements ResponseCode{
+public enum CustomResponseCode implements ResponseCode {
 
     // common
     SEARCH_SUCCESS("Search Complete"),

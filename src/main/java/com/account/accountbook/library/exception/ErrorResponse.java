@@ -8,14 +8,16 @@ import org.springframework.validation.FieldError;
 
 import java.util.List;
 
-/*************************
+/********************************************
  * 에러 응답 형식 정의 클래스
- *************************/
+ * 상태(status), 에러코드(code), 메세지(message)
+ ********************************************/
 @Getter
 @Builder
 @RequiredArgsConstructor
 public class ErrorResponse {
 
+    private final String status;
     private final String code;
     private final String message;
 
