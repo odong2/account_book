@@ -17,10 +17,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ThreadPoolConfig {
 
     // 동시에 실행 할 기본 스레드의 수(기본값 : 1)
-    private static final int CORE_POOL_SIZE = 10;
+    private static final int CORE_POOL_SIZE = 5;
 
     // thread-pool의 사용할 수 있는 최대 스레드 수(기본값 : Integer.MAX_VALUE)
-    private static final int MAX_POOL_SIZE = 30;
+    private static final int MAX_POOL_SIZE = 5;
 
     // thread-pool executor의 작업 큐의 크기(기본값 : Integer.MAX_VALUE)
     private static final int QUEUE_CAPACITY = 100;

@@ -34,7 +34,7 @@ import static com.account.accountbook.library.util.response.ResponseUtil.EXCEPTI
 public class GlobalException extends ResponseEntityExceptionHandler {
 
     /** slack **/
-    private SlackApi slackApi;
+    private final SlackApi slackApi;
 
     @Autowired
     public GlobalException(SlackApi sendError) {

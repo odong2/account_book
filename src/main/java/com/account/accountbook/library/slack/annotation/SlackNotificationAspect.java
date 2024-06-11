@@ -11,10 +11,7 @@ import org.springframework.stereotype.Component;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.ProceedingJoinPoint;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**************************************************
  * @SlackNotification 사용 시 실행되는 공통 기능 모듈화
@@ -23,7 +20,7 @@ import java.util.List;
 @Component
 public class SlackNotificationAspect {
 
-    private SlackApi slackApi;
+    private final SlackApi slackApi;
 
     @Autowired
     public SlackNotificationAspect(SlackApi sendTest) {
@@ -39,13 +36,13 @@ public class SlackNotificationAspect {
         attachment.setColor("good");
         //attachment.setTitle("");
 
-        // AOP에서 HttpServletRequest 접근 시도(RequestURL 출력 목적) -> 쓰레드가 달라서 조회 불가 -> 필요시 재시도
+        // AOP -> HttpServletRequest 접근 시도(RequestURL 출력 목적) -> 쓰레드가 달라서 조회 불가 -> 필요시 재시도
 //        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
         List<SlackField> fields = new ArrayList<>();
 //        fields.add(new SlackField().setTitle("Request URL").setValue(req.getRequestURL().toString()));
         fields.add(new SlackField().setTitle("Request Method").setValue(proceedingJoinPoint.getSignature().getName()));
-        fields.add(new SlackField().setTitle("Response").setValue(proceedingJoinPoint.proceed().toString()));
+        fields.add(new SlackField().setTitle("Response").setValue(Arrays.toString(proceedingJoinPoint.getArgs())));
         fields.add(new SlackField().setTitle("Timestamp").setValue(new Date().toString()));
         attachment.setFields(fields);
 
