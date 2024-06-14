@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.account.accountbook.library.util.response.ResponseUtil.EXCEPTION;
+import static com.account.accountbook.library.util.response.CustomResponseCode.*;
 
 @RestControllerAdvice
 @Slf4j
@@ -145,7 +145,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 
     private ErrorResponse makeErrorResponse(ErrorCode errorCode) {
         return ErrorResponse.builder()
-                .status(EXCEPTION)
+                .status(ERROR.getMessage())
                 .code(errorCode.name())
                 .message(errorCode.getMessage())
                 .build();
@@ -159,7 +159,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 
     private ErrorResponse makeErrorResponse(ErrorCode errorCode, String message) {
         return ErrorResponse.builder()
-                .status(EXCEPTION)
+                .status(ERROR.getMessage())
                 .code(errorCode.name())
                 .message(message)
                 .build();
@@ -179,7 +179,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
                 .collect(Collectors.toList());
 
         return ErrorResponse.builder()
-                .status(EXCEPTION)
+                .status(ERROR.getMessage())
                 .code(errorCode.name())
                 .message(errorCode.getMessage())
                 .errors(validationErrorList)

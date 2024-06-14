@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 public enum CustomResponseCode implements ResponseCode {
 
     // common
+    SUCCESS("success"),
+    ERROR("error"),
+    EXCEPTION("exception"),
     SEARCH_SUCCESS("Search Complete"),
     REGISTER_SUCCESS("Register Complete"),
     UPDATE_SUCCESS("Update Complete"),

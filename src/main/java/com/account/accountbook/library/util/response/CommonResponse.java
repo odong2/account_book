@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @Builder
 @RequiredArgsConstructor
-public class Response {
+public class CommonResponse<T> {
 
     private final String status;
 
@@ -21,5 +21,5 @@ public class Response {
     private final String message;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private final Object data;
+    private final T data;
 }
