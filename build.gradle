@@ -27,8 +27,6 @@ ext {
 }
 
 dependencies {
-	// 소셜 로그인
-//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	// spring-jdbc
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	// JPA
@@ -36,24 +34,15 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
 	implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.3.0'
 
-	// security
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-devtools'
-	// thymeleaf
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	// thymeleaf-layout-dialect
-	implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.0.0'
-//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	// validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	// 내장 톰캣
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	// queryParam 보는 용도
-//	implementation group: 'com.github.gavlyukovskiy', name: 'p6spy-spring-boot-starter', version: '1.9.0'
 	// json
 	implementation group: 'org.json', name: 'json', version: '20220924'
 	// 쿼리 파라미터 로그
-//	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 	// excel 다운로드
 	implementation group: 'org.apache.poi', name: 'poi', version: '5.0.0'
 	// modelMapper
@@ -67,11 +56,10 @@ dependencies {
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
-//	runtimeOnly 'com.mysql:mysql-connector-j'
+	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-//	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

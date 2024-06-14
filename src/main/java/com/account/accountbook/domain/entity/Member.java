@@ -21,10 +21,6 @@ public class Member {
     @Column(name = "member_idx", nullable = false, unique = true)
     private long idx;
 
-    @OneToOne(fetch = LAZY)
-    @JoinColumn(name = "member_setting_idx")
-    private MemberSetting memberSetting;
-
     @Comment("이름")
     private String name;
 
