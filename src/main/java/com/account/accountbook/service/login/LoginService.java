@@ -32,7 +32,7 @@ public class LoginService {
 
         String accessToken = searchDto.getAccessToken();
         String id = searchDto.getProvider() + "_" + searchDto.getId();
-        Optional<MemberDto> findMemberDto = memberRepository.findMember(accessToken, id);
+        Optional<MemberDto> findMemberDto = memberRepository.findMemberDtoByIdAndToken(accessToken, id);
 
         MemberDto memberDto = findMemberDto.orElse(null);
 

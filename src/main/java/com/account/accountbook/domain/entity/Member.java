@@ -1,5 +1,6 @@
 package com.account.accountbook.domain.entity;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
@@ -54,11 +55,6 @@ public class Member extends BaseEntity{
     @Comment("최근 로그인 일자")
     private LocalDateTime lastLoginDate;
 
-    // 생성자에 @Builder 적용
-    @Builder
-    public Member(String name) {
-        this.name = name;
-    }
 
     // 정적 팩토리 메서드
     public static Member createNewMember() {
@@ -72,4 +68,13 @@ public class Member extends BaseEntity{
     public void updateAccessTokenByLogin(String accessToken) {
         this.accessToken = accessToken;
     }
+
+    /*******************************************
+     * 생성자
+     *******************************************/
+    @QueryProjection
+    public Member(long idx) {
+        this.idx = idx;
+    }
+
 }
