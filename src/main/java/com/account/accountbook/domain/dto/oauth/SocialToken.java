@@ -1,11 +1,12 @@
 package com.account.accountbook.domain.dto.oauth;
 
+import com.account.accountbook.domain.entity.JoinType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class KakaoToken {
+public class SocialToken {
 
     private String token_type;
     private String access_token;

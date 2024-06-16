@@ -1,16 +1,16 @@
 package com.account.accountbook.controller.v1.oauth;
 
+import com.account.accountbook.domain.dto.oauth.MemberDto;
+import com.account.accountbook.domain.dto.oauth.SocialFormDto;
 import com.account.accountbook.library.util.response.CustomResponse;
-import com.account.accountbook.service.login.LoginService;
+import com.account.accountbook.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
 import static com.account.accountbook.domain.entity.JoinType.KAKAO;
@@ -23,19 +23,31 @@ import static com.account.accountbook.library.util.response.CustomResponseCode.S
 @RequestMapping("/v1/oauth")
 public class OauthV1Controller {
 
-    private final LoginService loginService;
-    @GetMapping("/kakao-login")
+    private final AuthService authService;
+    @GetMapping("/info/{social}")
     @ResponseStatus(HttpStatus.OK)
-    public CustomResponse<HashMap<String,String>> kakaoLogin(String code) {
+    public CustomResponse<MemberDto> getUerInfo(String code) {
         log.info("code:{}", code);
-        // 토큰 요청하여 얻음
-        String kakaoToken = loginService.requestToken(code, KAKAO);
-        System.out.println("kakaoToken = " + kakaoToken);
+        // 인가 코드로 엑세스 토큰 요청
+        String accessToken = authService.requestToken(code, KAKAO);
 
         // 사용자 정보 요청
-        HashMap<String, String> userInfo = loginService.requestUser(kakaoToken);
-        System.out.println("userInfo = " + userInfo);
+        return createSuccess(SEARCH_SUCCESS.getMessage(), authService.requestUser(accessToken, KAKAO)) ;
+    }
 
-        return createSuccess(SEARCH_SUCCESS.getMessage(), userInfo) ;
+    /**
+     * 소셜 회원가입
+     * @param socialFormDto
+     * @return
+     * @param <T>
+     */
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/social/sign-up")
+    public <T> CustomResponse<T> socialSignup(@RequestBody SocialFormDto socialFormDto) {
+        System.out.println("socialFormDto = " + socialFormDto);
+
+        authService.socialSignup(socialFormDto);
+
+        return createSuccessWithNoData(SEARCH_SUCCESS.getMessage());
     }
 }

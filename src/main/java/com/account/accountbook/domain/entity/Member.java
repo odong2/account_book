@@ -1,9 +1,6 @@
 package com.account.accountbook.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 
@@ -15,17 +12,21 @@ import static javax.persistence.FetchType.*;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Member {
+@ToString(of = {"idx", "name"})
+public class Member extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "member_idx", nullable = false, unique = true)
     private long idx;
 
+    @Column(nullable = false, unique = true) @Comment("아이디")
+    private String id;
+
     @Comment("이름")
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private JoinType type;
+    private JoinType provider;
 
     @Column(nullable = false, unique = true) @Comment("닉네임")
     private String nick;
@@ -35,6 +36,9 @@ public class Member {
 
     @Column(nullable = false) @Comment("비밀번호")
     private String password;
+
+    @Column(nullable = false) @Comment("access_token")
+    private String accessToken;
 
     @ColumnDefault("0") @Comment("자산")
     private int property;
@@ -52,5 +56,35 @@ public class Member {
     @Builder
     public Member(String name) {
         this.name = name;
+    }
+
+    @Builder
+    public Member(String id, String name,JoinType provider, String nick, String email, String password, String accessToken,
+                  int property, int debt, int state, LocalDateTime lastLoginDate) {
+
+        this.id = id;
+        this.name = name;
+        this.provider = provider;
+        this.nick = nick;
+        this.email = email;
+        this.password = password;
+        this.accessToken = accessToken;
+        this.property = property;
+        this.debt = debt;
+        this.state = state;
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    // 정적 팩토리 메서드
+    public static Member createNewMember() {
+        return new Member();
+    }
+
+
+    /********************************************
+     * 도메인 메서드
+     ********************************************/
+    public void updateAccessTokenByLogin(String accessToken) {
+        this.accessToken = accessToken;
     }
 }
