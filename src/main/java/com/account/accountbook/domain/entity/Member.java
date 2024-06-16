@@ -13,6 +13,8 @@ import static javax.persistence.FetchType.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString(of = {"idx", "name"})
+@AllArgsConstructor
+@Builder
 public class Member extends BaseEntity{
 
     @Id @GeneratedValue
@@ -56,23 +58,6 @@ public class Member extends BaseEntity{
     @Builder
     public Member(String name) {
         this.name = name;
-    }
-
-    @Builder
-    public Member(String id, String name,JoinType provider, String nick, String email, String password, String accessToken,
-                  int property, int debt, int state, LocalDateTime lastLoginDate) {
-
-        this.id = id;
-        this.name = name;
-        this.provider = provider;
-        this.nick = nick;
-        this.email = email;
-        this.password = password;
-        this.accessToken = accessToken;
-        this.property = property;
-        this.debt = debt;
-        this.state = state;
-        this.lastLoginDate = lastLoginDate;
     }
 
     // 정적 팩토리 메서드

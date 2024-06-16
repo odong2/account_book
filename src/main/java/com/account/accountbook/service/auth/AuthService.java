@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -165,7 +166,6 @@ public class AuthService {
 
             // 회원이 아닌 경우
             Member member = findMember.orElseGet(Member::createNewMember);
-            System.out.println("member = " + member);
 
             memberDto = MemberDto.builder()
                     .nickname(nickname)
@@ -177,13 +177,13 @@ public class AuthService {
 
             // 기존 회원인 경우 access_token 업데이트
             if (member.getIdx() > 0) {
-                System.out.println("여기 호출");
                 // 보안을 위해 암호화 하여 저장
                 String encryptedToken = aesEncrypt(accessToken);
                 member.updateAccessTokenByLogin(encryptedToken);
                 memberDto.setIsExistMember(true);
                 memberDto.setAccessToken(encryptedToken);
             }
+            System.out.println("memberDto = " + memberDto);
         } catch (IOException e) {
             log.error(e.toString());
         }
@@ -199,17 +199,18 @@ public class AuthService {
     @SneakyThrows
     @Transactional
     public void socialSignup(SocialFormDto socialFormDto) {
-//        Member member = Member.builder()
-//                .id(socialFormDto.getProvider() + "_" + socialFormDto.getId())
-//                .name(socialFormDto.getName())
-//                .email("이메일")
-//                .nick(socialFormDto.getNickname())
-//                .password(aesEncrypt("sdsdsdsdsd"))
-//                .lastLoginDate(LocalDateTime.now())
-//                .provider(socialFormDto.getProvider())
-//                .state(1)
-//                .build();
-//
-//        Member saveMember = memberRepository.save(member);
+        Member member = Member.builder()
+                .id(socialFormDto.getProvider() + "_" + socialFormDto.getId())
+                .name(socialFormDto.getName())
+                .email("이메일")
+                .nick(socialFormDto.getNickname())
+                .password(aesEncrypt("sdsdsdsdsd"))
+                .lastLoginDate(LocalDateTime.now())
+                .provider(socialFormDto.getProvider())
+                .state(1)
+                .accessToken("")
+                .build();
+
+        memberRepository.save(member);
     }
 }

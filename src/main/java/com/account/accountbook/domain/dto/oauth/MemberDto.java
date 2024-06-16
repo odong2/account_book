@@ -19,8 +19,10 @@ public class MemberDto {
     private Boolean isExistMember;
     private String accessToken;
 
-
-
+    public MemberDto(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
     @QueryProjection
     public MemberDto(String id, String name, String email, JoinType provider, String nickname) {
         this.id = id;
