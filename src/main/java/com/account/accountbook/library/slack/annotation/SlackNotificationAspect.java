@@ -37,10 +37,10 @@ public class SlackNotificationAspect {
         //attachment.setTitle("");
 
         // AOP -> HttpServletRequest 접근 시도(RequestURL 출력 목적) -> 쓰레드가 달라서 조회 불가 -> 필요시 재시도
-//        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        // HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
         List<SlackField> fields = new ArrayList<>();
-//        fields.add(new SlackField().setTitle("Request URL").setValue(req.getRequestURL().toString()));
+        // fields.add(new SlackField().setTitle("Request URL").setValue(req.getRequestURL().toString()));
         fields.add(new SlackField().setTitle("Request Method").setValue(proceedingJoinPoint.getSignature().getName()));
         fields.add(new SlackField().setTitle("Response").setValue(Arrays.toString(proceedingJoinPoint.getArgs())));
         fields.add(new SlackField().setTitle("Timestamp").setValue(new Date().toString()));
