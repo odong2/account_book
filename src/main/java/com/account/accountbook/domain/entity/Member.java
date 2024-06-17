@@ -1,5 +1,6 @@
 package com.account.accountbook.domain.entity;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
@@ -13,6 +14,8 @@ import static javax.persistence.FetchType.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString(of = {"idx", "name"})
+@AllArgsConstructor
+@Builder
 public class Member extends BaseEntity{
 
     @Id @GeneratedValue
@@ -52,28 +55,6 @@ public class Member extends BaseEntity{
     @Comment("최근 로그인 일자")
     private LocalDateTime lastLoginDate;
 
-    // 생성자에 @Builder 적용
-    @Builder
-    public Member(String name) {
-        this.name = name;
-    }
-
-    @Builder
-    public Member(String id, String name,JoinType provider, String nick, String email, String password, String accessToken,
-                  int property, int debt, int state, LocalDateTime lastLoginDate) {
-
-        this.id = id;
-        this.name = name;
-        this.provider = provider;
-        this.nick = nick;
-        this.email = email;
-        this.password = password;
-        this.accessToken = accessToken;
-        this.property = property;
-        this.debt = debt;
-        this.state = state;
-        this.lastLoginDate = lastLoginDate;
-    }
 
     // 정적 팩토리 메서드
     public static Member createNewMember() {
@@ -87,4 +68,13 @@ public class Member extends BaseEntity{
     public void updateAccessTokenByLogin(String accessToken) {
         this.accessToken = accessToken;
     }
+
+    /*******************************************
+     * 생성자
+     *******************************************/
+    @QueryProjection
+    public Member(long idx) {
+        this.idx = idx;
+    }
+
 }

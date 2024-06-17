@@ -15,11 +15,14 @@ public class MemberDto {
     private String email;
     private JoinType provider;
     private String nickname;
-    private String token;
     private Boolean isExistMember;
     private String accessToken;
+    private String profileImage;
 
-
+    public MemberDto(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @QueryProjection
     public MemberDto(String id, String name, String email, JoinType provider, String nickname) {
@@ -31,12 +34,15 @@ public class MemberDto {
     }
 
     @Builder
-    public MemberDto(String id, String name, String email, String nickname, JoinType provider, String token, boolean isExistMember) {
+    public MemberDto(String id, String name, String email, String nickname, JoinType provider, String accessToken, boolean isExistMember, String profileImage) {
         this.id = id;
         this.email = email;
         this.name = nickname;
         this.provider = provider;
-        this.token = token;
+        this.accessToken = accessToken;
         this.isExistMember = isExistMember;
+        this.profileImage = profileImage;
     }
+
+
 }
