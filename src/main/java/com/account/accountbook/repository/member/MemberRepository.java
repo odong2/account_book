@@ -12,6 +12,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
 
     Optional<Member> findSocialMemberById(String id);
 
+
     @Query(value = "select new com.account.accountbook.domain.dto.oauth.MemberDto(m.id, m.name) from Member m where m.accessToken = :accessToken and m.id = :id")
     Optional<MemberDto> findMember(@Param("accessToken") String accessToken, @Param("id") String id);
 }

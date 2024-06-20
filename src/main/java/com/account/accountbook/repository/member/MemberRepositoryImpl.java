@@ -5,7 +5,6 @@ import com.account.accountbook.domain.dto.oauth.QMemberDto;
 import com.account.accountbook.domain.entity.Member;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 
@@ -36,7 +35,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                     .from(member)
                     .where(
                         member.accessToken.eq(accessToken),
-                        member.id.eq(member.id))
+                        member.id.eq(id))
                 .fetchOne()
         );
     }
@@ -50,7 +49,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
 //                                member.idx)
 //                )
 //                .from(member)
-//                .where(member.id.eq(member.id))
+//                .where(member.id.eq(id))
 //                .fetchOne();
 //
 //
